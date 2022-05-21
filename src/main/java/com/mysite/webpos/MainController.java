@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 	
 	@RequestMapping("/")
-    @ResponseBody
     public String root() {
-        return "안녕하세요 webpos에 오신것을 환영합니다.";
-        //TODO 메인화면 redirect 
+        return "redirect:/register/sale";
     }
 
 }
