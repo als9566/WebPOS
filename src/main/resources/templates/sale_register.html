@@ -1,7 +1,54 @@
 <!--link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}"-->
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
-	판매등록
+	
+	<div class="border-bottom py-2 ">
+	 	<div style="float:left">
+	 	<h5>2022-05-22 [0001]</h5>
+	 	</div>
+		<div class="text-end">
+		<button type="button" class="btn btn-outline-secondary btn-sm">+</button>
+		</div>
+	</div>
+	
+	
+	<div class="container py-3">
+	<form method="post">
+		<!--TODO 값넣고 히든처리-->
+		<label for="salesdate" class="form-label">판매일자 : </label>
+        <input type="text" name="salesdate" class="form-inline" style="width:150px;">
+        <label for="salesnumber" class="form-label">판매번호 : </label>
+        <input type="text" name="salesnumber" class="form-inline" style="width:150px;">
+        <!--TODO-->
+	    <div class="row">
+	        <div class="col-md-5">				
+				<label for="product" class="form-label">상품 : </label>
+           		<input type="text" name="product" class="form-inline" style="width:150px;">
+           		<a class="link-secondary" href="#">
+				<i class="bi bi-search" ></i>
+				</a>
+	        </div>
+	        <div class="col-md-5">
+	        	<label for="quantity" class="form-label">수량 : </label>
+           		<input type="text" name="quantity" class="form-inline" style="width:50px;">
+	       		<button type="button" class="btn btn-outline-white">+</button>
+	      		<button type="button" class="btn btn-outline-white">-</button>
+	      		<input type="submit" value="등록" class="btn btn-outline-secondary">
+	        </div>
+	    </div>
+	</form>    
+	</div>
+	
+	<div style ="display:none" class="pb-3"> <!--"display:block"-->
+		품명 : ~~~~~~~   W12,000
+	</div>
+	
+	<div class="card" >
+	  <div class="card-body">
+		판매내역이 없습니다.
+	  </div>
+	</div>	
+	
 </div>
 
 </html>
