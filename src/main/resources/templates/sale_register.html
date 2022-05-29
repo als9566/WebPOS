@@ -4,7 +4,7 @@
 	
 	<div class="border-bottom py-2 ">
 	 	<div style="float:left">
-	 	<h5>2022-05-22 [0001]</h5>
+	 	<h5><span th:text="${todayText}+' ['+${todayNumber}+']'"></span></h5>
 	 	</div>
 		<div class="text-end">
 		<button type="button" class="btn btn-outline-secondary btn-sm">+</button>
@@ -14,12 +14,9 @@
 	
 	<div class="container py-3">
 	<form method="post">
-		<!--TODO 값넣고 히든처리-->
-		<label for="salesdate" class="form-label">판매일자 : </label>
-        <input type="text" name="salesdate" class="form-inline" style="width:150px;">
-        <label for="salesnumber" class="form-label">판매번호 : </label>
-        <input type="text" name="salesnumber" class="form-inline" style="width:150px;">
-        <!--TODO-->
+        <input type="hidden" name="salesdate" class="form-inline" style="width:150px;" th:value="${today}"> 
+        <input type="hidden" name="salesnumber" class="form-inline" style="width:150px;" th:value="${todayNumber}">
+        
 	    <div class="row">
 	        <div class="col-md-5">				
 				<label for="product" class="form-label">상품 : </label>

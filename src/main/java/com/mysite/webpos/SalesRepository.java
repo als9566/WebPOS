@@ -11,4 +11,8 @@ public interface SalesRepository extends JpaRepository<Sales, Integer> {
 		  +" where salesNumber = ?1 "
 		  +"   and salesDate = ?2")
 	Integer findBysalesNumberAndSalesDate(Integer salesNumber, String salesDate);
+	
+	@Query("select nvl(MAX(salesNumber),0)+1 from Sales "
+			  +" where salesDate = ?1")
+	Integer findBySalesDate(String salesDate);
 }
