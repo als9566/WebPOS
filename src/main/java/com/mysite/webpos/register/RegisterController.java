@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.mysite.webpos.Sales;
 import com.mysite.webpos.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -49,7 +51,10 @@ public class RegisterController {
     						, @RequestParam Integer quantity
     						, @RequestParam String salesdate
     						, @RequestParam Integer salesnumber) {
-		this.salesService.create(product, quantity, salesdate, salesnumber);
+		System.out.println(salesdate);
+		salesdate = salesdate.substring(0,8);
+		System.out.println(salesdate);
+		this.salesService.create(product, quantity, salesdate, salesnumber);		
 		return "redirect:/register/sale?salesdate="+salesdate+"&salesnumber="+salesnumber.toString();
     }  
 	
@@ -58,8 +63,9 @@ public class RegisterController {
 						   @RequestParam(value = "salesnumber", required = false) String salesnumber,
 						   Model model) {
 		SimpleDateFormat numberformat = new SimpleDateFormat("yyyyMMdd");	
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");	
 		
+	
 		if (salesdate==null && salesnumber==null) {		
 			Date now = new Date();	
 			Integer todayNumber = this.salesService.maxDateNumber(numberformat.format(now));
@@ -72,6 +78,7 @@ public class RegisterController {
 			return "sale_register";
 		}
 		else {
+			List<Sales> SalesList = this.salesService.getDetailList(salesdate, Integer.parseInt(salesnumber));
 			StringBuilder sb = new StringBuilder(10);
 			sb.append(salesdate.substring(0, 4));
 			sb.append("-");
@@ -81,9 +88,11 @@ public class RegisterController {
 			model.addAttribute("todayText", sb);
 			model.addAttribute("today", salesdate);
 			model.addAttribute("todayNumber", salesnumber);
+			model.addAttribute("SalesList", SalesList);
 			
 			return "sale_register";	
 		}
+		
 		
 		
 	}

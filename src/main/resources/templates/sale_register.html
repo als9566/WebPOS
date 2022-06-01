@@ -13,7 +13,7 @@
 	
 	
 	<div class="container py-3">
-	<form method="post">
+	<form method="post"> <!-- type="hidden" -->
         <input type="hidden" name="salesdate" class="form-inline" style="width:150px;" th:value="${today}"> 
         <input type="hidden" name="salesnumber" class="form-inline" style="width:150px;" th:value="${todayNumber}">
         
@@ -42,7 +42,22 @@
 	
 	<div class="card" >
 	  <div class="card-body">
-		판매내역이 없습니다.
+		<table class="table table-hover">
+		    <thead>
+		        <tr class="text-center">
+		            <th>No.</th>
+		            <th style="width:50%">상품</th>
+		            <th>수량</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr class="text-center" th:each="List : ${SalesList}">
+		            <td th:text="${List.salesDetailNumber}"></td>
+		            <td th:text="${List.product}"></td>
+		            <td th:text="${List.ea}"></td>
+		        </tr>
+		    </tbody>
+		</table>
 	  </div>
 	</div>	
 	

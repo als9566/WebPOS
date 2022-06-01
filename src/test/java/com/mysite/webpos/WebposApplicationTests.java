@@ -22,7 +22,7 @@ class WebposApplicationTests {
         this.salesRepository.save(q1); 
 	}*/
 	void contextLoads() {
-		salesRepository.findBysalesNumberAndSalesDate(1,"20220522");
+		//salesRepository.findBysalesNumberAndSalesDate(1,"20220522");
 	}
 	
 	
