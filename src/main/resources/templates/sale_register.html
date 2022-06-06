@@ -7,29 +7,29 @@
 	 	<h5><span th:text="${todayText}+' ['+${todayNumber}+']'"></span></h5>
 	 	</div>
 		<div class="text-end">
-		<button type="button" class="btn btn-outline-secondary btn-sm">+</button>
+		<button type="button" id="btn_puls" class="btn btn-outline-secondary btn-sm">+</button>
 		</div>
 	</div>
 	
 	
 	<div class="container py-3">
 	<form method="post"> <!-- type="hidden" -->
-        <input type="hidden" name="salesdate" class="form-inline" style="width:150px;" th:value="${today}"> 
-        <input type="hidden" name="salesnumber" class="form-inline" style="width:150px;" th:value="${todayNumber}">
+        <input type="hidden" id="salesdate" name="salesdate" class="form-inline" style="width:150px;" th:value="${today}"> 
+        <input type="hidden" id="salesnumber" name="salesnumber" class="form-inline" style="width:150px;" th:value="${todayNumber}">
         
 	    <div class="row">
 	        <div class="col-md-5">				
 				<label for="product" class="form-label">상품 : </label>
            		<input type="text" name="product" class="form-inline" style="width:150px;">
-           		<a class="link-secondary" href="#">
+           		<a class="link-secondary" href="javascript:popup()">
 				<i class="bi bi-search" ></i>
 				</a>
 	        </div>
 	        <div class="col-md-5">
 	        	<label for="quantity" class="form-label">수량 : </label>
-           		<input type="text" name="quantity" class="form-inline" style="width:50px;">
-	       		<button type="button" class="btn btn-outline-white">+</button>
-	      		<button type="button" class="btn btn-outline-white">-</button>
+           		<input type="text" id="quantity" name="quantity" class="form-inline" style="width:50px;" value="1">
+	       		<button type="button" id="qt_puls" class="btn btn-outline-white">+</button>
+	      		<button type="button" id="qt_minus" class="btn btn-outline-white">-</button>
 	      		<input type="submit" value="등록" class="btn btn-outline-secondary">
 	        </div>
 	    </div>
@@ -62,5 +62,34 @@
 	</div>	
 	
 </div>
-
+<script layout:fragment="script" type='text/javascript'>
+const btn_puls = document.getElementById("btn_puls");
+btn_puls.addEventListener('click', function() {
+    window.location.href = '../register/sale';
+});
+const qt_puls = document.getElementById("qt_puls");
+qt_puls.addEventListener('click', function() {
+	if(document.getElementById('quantity').value == ''){
+		document.getElementById('quantity').value = '1';
+	}
+	else{
+		document.getElementById('quantity').value = Number(document.getElementById('quantity').value)+1;
+	}
+});
+const qt_minus = document.getElementById("qt_minus");
+qt_minus.addEventListener('click', function() {
+	if(document.getElementById('quantity').value == ''){
+		document.getElementById('quantity').value = '-1';
+	}
+	else{
+		document.getElementById('quantity').value = Number(document.getElementById('quantity').value)-1;
+	}
+});
+function popup(){
+            var url = "../product/search";
+            var name = "popup";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+</script>
 </html>

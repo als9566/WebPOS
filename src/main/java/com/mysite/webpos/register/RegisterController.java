@@ -92,9 +92,7 @@ public class RegisterController {
 			
 			return "sale_register";	
 		}
-		
-		
-		
+	
 	}
 
 
